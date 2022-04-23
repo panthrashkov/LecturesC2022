@@ -27,7 +27,8 @@ void printArray(char *message, int *array, unsigned int arrayLength) {
 	printf("\n");
 }
 
-//int (*fp)(int);
+typedef int (*funp)(int);
+
 //int (*fpp)(void *, void *);
 
 void print(void * p, void* arg){
@@ -41,25 +42,38 @@ void calc_total(void * p, void* arg){
 	*ptotal += node_pointer -> data;
 }
 
+int doubleValue(int v){
+	return 2*v;
+}
+
+
 int main(void){
+	// ”казатели на void
 	int x;
+
 	void *p = &x;
 	float y = 3.0;
 	p =&y;
 	printf("%p \n", p);
 //	printf("%f \n", *p);
-	printf("%f \n", *(float *)p);
+	printf("%d \n", *(int *)p);
 
-	int (*fp)(int);
-	int (*fpp)(void *, void *);
+
+
+	// ”казатели на функции
+	funp fp;
+	fp = doubleValue;
+	p = fp;
+	printf("double %d \n", ((funp) p)(5));
+//	int (*fpp)(void *, void *);
 
 	printArray("before sort \n", array, ARRAY_SIZE);
 	qsort ( array , ARRAY_SIZE , sizeof ( int ) , asc );
 	printArray("after sort asc \n", array, ARRAY_SIZE);
 	qsort ( array , ARRAY_SIZE , sizeof ( int ) , desc );
 	printArray("after sort desc \n", array, ARRAY_SIZE);
-	qsort ( array_float , ARRAY_SIZE , sizeof ( int ) , ascf );
-//	printArray("after sort desc \n", array_float, ARRAY_SIZE);
+	qsort ( array_float , ARRAY_SIZE , sizeof ( float ) , ascf );
+	printArray("after sort desc \n", array_float, ARRAY_SIZE);
 
 
 	node * np = create_node(10);
@@ -73,8 +87,27 @@ int main(void){
 	printf("total %d", total);
 
 
+	// сложные выражени€
+	char(* foo)[5];
+	// foo - это...
+	// foo - это указатель на...
+	// foo - это указатель на массив из п€ти...
+	// foo - это указатель на массив из п€ти символов
 
+	char* (*foo1)(char*);
+	// foo1 - это...
+	// foo1 - это указатель на...
+	// foo1 - это указатель на функцию, принимающую указатель на символ...
+	// foo1 - это указатель на функцию, принимающую указатель на символ, возвращающую указатель на...
+	// foo1 - это указатель на функцию, принимающую указатель на символ, возвращающую указатель на символ
 
-
-
+	char* (*(*foo2[5])(char*))[];
+	// foo2 - это...
+	// foo2 - это массив из 5...
+	// foo2 - это массив из 5 указателей на...
+	// foo2 - это массив из 5 указателей на функцию, принимающую указатель на символ...
+	// foo2 - это массив из 5 указателей на функцию, принимающую указатель на символ и возвращающую указатель на...
+	// foo2 - это массив из 5 указателей на функцию, принимающую указатель на символ и возвращающую указатель на массив из...
+	// foo2 - это массив из 5 указателей на функцию, принимающую указатель на символ и возвращающую указатель на массив из указателей на...
+	// foo2 - это массив из 5 указателей на функцию, принимающую указатель на символ и возвращающую указатель на массив из указателей на символ
 }

@@ -17,6 +17,7 @@ void push(int elem){
 }
 
 int pop(void){
+
 	if(stack_list != NULL){
 		node * pelem = stack_list;
 		int elem = stack_list ->data;
