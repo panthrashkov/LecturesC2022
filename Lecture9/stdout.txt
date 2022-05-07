@@ -1,6 +1,6 @@
 Debug
 main.c
 stdout.txt
-atmainexit2 10404 
-atmainexit1 48176 
+atmainexit2 5 
+atmainexit1 21891 
  
